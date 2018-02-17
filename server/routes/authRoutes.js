@@ -10,7 +10,13 @@ module.exports = app => {
   );
 
   // callback route handler with oAuth code for user profile
-  app.get('/auth/google/callback', passport.authenticate('google'));
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google'),
+    (req, res) => {
+      res.redirect('/surveys');
+    }
+  );
 
   // route to see current user logged in
   app.get('/api/current_user', (req, res) => {
